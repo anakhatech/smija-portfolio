@@ -39,30 +39,32 @@ export default function Contact() {
     return () => observer.disconnect();
   }, []);
 
+  // ================= FORM SUBMISSION =================
+
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          subject,
-          message,
-        }),
-      });
+      const response = await fetch(
+        "https://formspree.io/f/meajznjp",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            subject,
+            message,
+          }),
+        }
+      );
 
-      const data = await response.json();
-
-      console.log("API Response:", data);
-
-      if (response.ok && data.success) {
+      if (response.ok) {
         alert("Message sent successfully!");
 
         setName("");
@@ -70,15 +72,17 @@ export default function Contact() {
         setSubject("");
         setMessage("");
       } else {
+        const data = await response.json();
+
         alert(
-          data.message ||
-            "Failed to send message. Please try again."
+          data?.errors?.[0]?.message ||
+            "Something went wrong. Please try again."
         );
       }
     } catch (error) {
-      console.error("Contact form error:", error);
+      console.error("Form submission error:", error);
 
-      alert("Unable to connect to the server. Please try again.");
+      alert("Something went wrong. Please try again.");
     }
   };
 
@@ -88,7 +92,7 @@ export default function Contact() {
       id="contact"
       className="relative overflow-hidden bg-[#e8ded0] px-6 py-28 lg:px-10 lg:py-36"
     >
-      {/* BACKGROUND */}
+      {/* ================= BACKGROUND ================= */}
 
       <div
         className={`absolute -left-48 bottom-0 h-[38rem] w-[38rem] rounded-full bg-[#9a7052]/20 blur-3xl transition-all duration-[2000ms] ${
@@ -123,7 +127,8 @@ export default function Contact() {
       <div className="pointer-events-none absolute bottom-[20%] left-[20%] h-20 w-20 animate-[pulse_6s_ease-in-out_infinite] rounded-full bg-[#79513b]/15 blur-2xl" />
 
       <div className="relative mx-auto max-w-7xl">
-        {/* HEADER */}
+
+        {/* ================= HEADER ================= */}
 
         <div
           className={`grid gap-10 transition-all duration-[1200ms] lg:grid-cols-[1fr_0.8fr] lg:items-end ${
@@ -177,10 +182,11 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* CONTACT CONTENT */}
+        {/* ================= CONTACT CONTENT ================= */}
 
         <div className="mt-20 grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-          {/* LEFT SIDE */}
+
+          {/* ================= LEFT SIDE ================= */}
 
           <div
             className={`relative overflow-hidden rounded-[2.5rem] bg-[#382a22] p-8 shadow-2xl transition-all duration-[1300ms] sm:p-12 ${
@@ -228,10 +234,15 @@ export default function Contact() {
                 }}
               >
                 Let&apos;s talk about your
-                <span className="text-[#cfaf93]"> next project.</span>
+                <span className="text-[#cfaf93]">
+                  {" "}next project.
+                </span>
               </h3>
 
+              {/* CONTACT CARDS */}
+
               <div className="mt-12 space-y-5">
+
                 {/* EMAIL */}
 
                 <a
@@ -246,7 +257,10 @@ export default function Contact() {
                   }}
                 >
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#9a7052] shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
-                    <Mail size={22} className="text-[#f7efe7]" />
+                    <Mail
+                      size={22}
+                      className="text-[#f7efe7]"
+                    />
                   </div>
 
                   <div className="min-w-0">
@@ -279,7 +293,10 @@ export default function Contact() {
                   }}
                 >
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#79513b] shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
-                    <Phone size={22} className="text-[#f7efe7]" />
+                    <Phone
+                      size={22}
+                      className="text-[#f7efe7]"
+                    />
                   </div>
 
                   <div>
@@ -311,7 +328,10 @@ export default function Contact() {
                   }}
                 >
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#a87959] shadow-lg">
-                    <MapPin size={22} className="text-[#f7efe7]" />
+                    <MapPin
+                      size={22}
+                      className="text-[#f7efe7]"
+                    />
                   </div>
 
                   <div>
@@ -325,6 +345,8 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
+
+              {/* AVAILABILITY */}
 
               <div
                 className={`mt-12 flex items-center gap-3 transition-all duration-1000 ${
@@ -345,7 +367,7 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* RIGHT SIDE FORM */}
+          {/* ================= RIGHT SIDE FORM ================= */}
 
           <div
             className={`rounded-[2.5rem] border border-[#c9ad97] bg-[#f5eee5]/90 p-8 shadow-[0_20px_60px_rgba(67,43,30,0.10)] transition-all duration-[1300ms] sm:p-12 ${
@@ -381,13 +403,16 @@ export default function Contact() {
               let&apos;s explore how we can work together.
             </p>
 
-            {/* FORM */}
+            {/* ================= FORM ================= */}
 
             <form
               onSubmit={handleSubmit}
               className="mt-10 space-y-6"
             >
               <div className="grid gap-6 sm:grid-cols-2">
+
+                {/* NAME */}
+
                 <div>
                   <label className="mb-3 block text-xs font-bold tracking-[0.14em] text-[#79513b]">
                     YOUR NAME
@@ -402,6 +427,8 @@ export default function Contact() {
                     className="w-full rounded-xl border border-[#cdb5a2] bg-[#e8ded0]/60 px-5 py-4 text-[#382a22] outline-none transition-all duration-300 placeholder:text-[#9b8273] focus:-translate-y-1 focus:border-[#8b6248] focus:ring-2 focus:ring-[#9a7052]/15"
                   />
                 </div>
+
+                {/* EMAIL */}
 
                 <div>
                   <label className="mb-3 block text-xs font-bold tracking-[0.14em] text-[#79513b]">
@@ -419,6 +446,8 @@ export default function Contact() {
                 </div>
               </div>
 
+              {/* SUBJECT */}
+
               <div>
                 <label className="mb-3 block text-xs font-bold tracking-[0.14em] text-[#79513b]">
                   SUBJECT
@@ -433,6 +462,8 @@ export default function Contact() {
                   className="w-full rounded-xl border border-[#cdb5a2] bg-[#e8ded0]/60 px-5 py-4 text-[#382a22] outline-none transition-all duration-300 placeholder:text-[#9b8273] focus:-translate-y-1 focus:border-[#8b6248] focus:ring-2 focus:ring-[#9a7052]/15"
                 />
               </div>
+
+              {/* MESSAGE */}
 
               <div>
                 <label className="mb-3 block text-xs font-bold tracking-[0.14em] text-[#79513b]">
@@ -449,6 +480,8 @@ export default function Contact() {
                 />
               </div>
 
+              {/* BUTTON */}
+
               <button
                 type="submit"
                 className="group mt-3 flex items-center gap-3 rounded-full bg-[#382a22] px-8 py-4 text-sm font-bold tracking-[0.08em] text-[#f7efe7] transition-all duration-500 hover:-translate-y-2 hover:bg-[#79513b] hover:shadow-[0_20px_40px_rgba(56,42,34,0.25)]"
@@ -464,7 +497,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* BOTTOM STATEMENT */}
+        {/* ================= BOTTOM STATEMENT ================= */}
 
         <div
           className={`mt-20 border-t border-[#b99c86]/60 pt-10 transition-all duration-[1200ms] ${
