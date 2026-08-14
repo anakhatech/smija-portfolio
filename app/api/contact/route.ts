@@ -35,7 +35,8 @@ export async function POST(request: Request) {
     const { data, error } = await resend.emails.send({
       from: "Smija Portfolio <onboarding@resend.dev>",
 
-      to: ["smijavijayan1@gmail.com"],
+      // Testing recipient - your Resend account email
+      to: ["anakhavijay766@gmail.com"],
 
       replyTo: email,
 
@@ -45,7 +46,9 @@ export async function POST(request: Request) {
         <h2>New Contact Form Message</h2>
 
         <p><strong>Name:</strong> ${name}</p>
+
         <p><strong>Email:</strong> ${email}</p>
+
         <p><strong>Subject:</strong> ${
           subject || "New Portfolio Enquiry"
         }</p>
