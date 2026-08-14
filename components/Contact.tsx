@@ -60,7 +60,9 @@ export default function Contact() {
 
       const data = await response.json();
 
-      if (data.success) {
+      console.log("API Response:", data);
+
+      if (response.ok && data.success) {
         alert("Message sent successfully!");
 
         setName("");
@@ -68,10 +70,15 @@ export default function Contact() {
         setSubject("");
         setMessage("");
       } else {
-        alert("Something went wrong. Please try again.");
+        alert(
+          data.message ||
+            "Failed to send message. Please try again."
+        );
       }
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      console.error("Contact form error:", error);
+
+      alert("Unable to connect to the server. Please try again.");
     }
   };
 
@@ -81,7 +88,7 @@ export default function Contact() {
       id="contact"
       className="relative overflow-hidden bg-[#e8ded0] px-6 py-28 lg:px-10 lg:py-36"
     >
-      {/* ================= BACKGROUND ================= */}
+      {/* BACKGROUND */}
 
       <div
         className={`absolute -left-48 bottom-0 h-[38rem] w-[38rem] rounded-full bg-[#9a7052]/20 blur-3xl transition-all duration-[2000ms] ${
@@ -99,7 +106,7 @@ export default function Contact() {
         }`}
       />
 
-      {/* Floating luxury circles */}
+      {/* FLOATING CIRCLE */}
 
       <div
         className={`pointer-events-none absolute right-[8%] top-[12%] hidden h-80 w-80 rounded-full border border-[#9a7052]/20 transition-all duration-[2500ms] lg:block ${
@@ -109,17 +116,14 @@ export default function Contact() {
         }`}
       />
 
-     
-
-      {/* Floating glow */}
+      {/* GLOW */}
 
       <div className="pointer-events-none absolute right-[20%] top-[18%] h-24 w-24 animate-[pulse_5s_ease-in-out_infinite] rounded-full bg-[#cfa67f]/15 blur-2xl" />
 
       <div className="pointer-events-none absolute bottom-[20%] left-[20%] h-20 w-20 animate-[pulse_6s_ease-in-out_infinite] rounded-full bg-[#79513b]/15 blur-2xl" />
 
       <div className="relative mx-auto max-w-7xl">
-
-        {/* ================= HEADER ================= */}
+        {/* HEADER */}
 
         <div
           className={`grid gap-10 transition-all duration-[1200ms] lg:grid-cols-[1fr_0.8fr] lg:items-end ${
@@ -129,8 +133,6 @@ export default function Contact() {
           }`}
         >
           <div>
-            {/* SECTION NUMBER */}
-
             <div className="mb-7 flex items-center gap-5">
               <span className="text-4xl font-semibold tracking-[0.08em] text-[#8A6048] sm:text-5xl">
                 06
@@ -147,8 +149,6 @@ export default function Contact() {
               </span>
             </div>
 
-            {/* TITLE */}
-
             <h2
               className="max-w-5xl text-5xl leading-[1.02] text-[#332A25] sm:text-6xl lg:text-7xl"
               style={{
@@ -162,10 +162,8 @@ export default function Contact() {
             </h2>
           </div>
 
-          {/* HEADER DESCRIPTION */}
-
           <div
-            className={`border-l-[3px] border-[#9A7052] pl-6 transition-all delay-300 duration-[1200ms ${
+            className={`border-l-[3px] border-[#9A7052] pl-6 transition-all delay-300 duration-[1200ms] ${
               visible
                 ? "translate-x-0 opacity-100"
                 : "translate-x-12 opacity-0"
@@ -179,11 +177,10 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* ================= CONTACT CONTENT ================= */}
+        {/* CONTACT CONTENT */}
 
         <div className="mt-20 grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-
-          {/* ================= LEFT SIDE ================= */}
+          {/* LEFT SIDE */}
 
           <div
             className={`relative overflow-hidden rounded-[2.5rem] bg-[#382a22] p-8 shadow-2xl transition-all duration-[1300ms] sm:p-12 ${
@@ -195,20 +192,13 @@ export default function Contact() {
               transitionDelay: "200ms",
             }}
           >
-            {/* Decorative circles */}
+            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 animate-[spin_30s_linear_infinite] rounded-full border border-[#cfaf93]/20" />
 
-            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full border border-[#cfaf93]/20 animate-[spin_30s_linear_infinite]" />
-
-            <div className="pointer-events-none absolute -right-10 top-16 h-48 w-48 rounded-full border border-[#cfaf93]/20 animate-[spin_20s_linear_infinite_reverse]" />
-
-            {/* Glow */}
+            <div className="pointer-events-none absolute -right-10 top-16 h-48 w-48 animate-[spin_20s_linear_infinite_reverse] rounded-full border border-[#cfaf93]/20" />
 
             <div className="pointer-events-none absolute bottom-10 left-10 h-32 w-32 animate-[pulse_6s_ease-in-out_infinite] rounded-full bg-[#9a7052]/10 blur-3xl" />
 
             <div className="relative">
-
-              {/* SMALL TITLE */}
-
               <div
                 className={`flex items-center gap-4 transition-all duration-1000 ${
                   visible
@@ -226,8 +216,6 @@ export default function Contact() {
                 </p>
               </div>
 
-              {/* TITLE */}
-
               <h3
                 className={`mt-7 max-w-lg text-4xl font-semibold leading-tight text-[#f7efe7] transition-all duration-[1200ms] sm:text-5xl ${
                   visible
@@ -240,15 +228,10 @@ export default function Contact() {
                 }}
               >
                 Let&apos;s talk about your
-                <span className="text-[#cfaf93]">
-                  {" "}next project.
-                </span>
+                <span className="text-[#cfaf93]"> next project.</span>
               </h3>
 
-              {/* CONTACT CARDS */}
-
               <div className="mt-12 space-y-5">
-
                 {/* EMAIL */}
 
                 <a
@@ -263,10 +246,7 @@ export default function Contact() {
                   }}
                 >
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#9a7052] shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
-                    <Mail
-                      size={22}
-                      className="text-[#f7efe7]"
-                    />
+                    <Mail size={22} className="text-[#f7efe7]" />
                   </div>
 
                   <div className="min-w-0">
@@ -299,10 +279,7 @@ export default function Contact() {
                   }}
                 >
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#79513b] shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
-                    <Phone
-                      size={22}
-                      className="text-[#f7efe7]"
-                    />
+                    <Phone size={22} className="text-[#f7efe7]" />
                   </div>
 
                   <div>
@@ -333,11 +310,8 @@ export default function Contact() {
                     transitionDelay: "1000ms",
                   }}
                 >
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#a87959] shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
-                    <MapPin
-                      size={22}
-                      className="text-[#f7efe7]"
-                    />
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#a87959] shadow-lg">
+                    <MapPin size={22} className="text-[#f7efe7]" />
                   </div>
 
                   <div>
@@ -351,8 +325,6 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-
-              {/* AVAILABILITY */}
 
               <div
                 className={`mt-12 flex items-center gap-3 transition-all duration-1000 ${
@@ -373,7 +345,7 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* ================= RIGHT SIDE FORM ================= */}
+          {/* RIGHT SIDE FORM */}
 
           <div
             className={`rounded-[2.5rem] border border-[#c9ad97] bg-[#f5eee5]/90 p-8 shadow-[0_20px_60px_rgba(67,43,30,0.10)] transition-all duration-[1300ms] sm:p-12 ${
@@ -385,20 +357,8 @@ export default function Contact() {
               transitionDelay: "250ms",
             }}
           >
-
-            {/* FORM HEADER */}
-
-            <div
-              className={`flex items-center gap-4 transition-all duration-1000 ${
-                visible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-8 opacity-0"
-              }`}
-              style={{
-                transitionDelay: "500ms",
-              }}
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#8b6248] text-[#f7efe7] shadow-lg transition-transform duration-500 hover:scale-110 hover:rotate-6">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#8b6248] text-[#f7efe7] shadow-lg">
                 <Send size={19} />
               </div>
 
@@ -408,54 +368,27 @@ export default function Contact() {
             </div>
 
             <h3
-              className={`mt-7 text-4xl font-semibold text-[#382a22] transition-all duration-1000 sm:text-5xl ${
-                visible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
+              className="mt-7 text-4xl font-semibold text-[#382a22] sm:text-5xl"
               style={{
                 fontFamily: "Georgia, serif",
-                transitionDelay: "600ms",
               }}
             >
               Start a conversation.
             </h3>
 
-            <p
-              className={`mt-4 max-w-xl text-base leading-7 text-[#6b5548] transition-all duration-1000 ${
-                visible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-8 opacity-0"
-              }`}
-              style={{
-                transitionDelay: "700ms",
-              }}
-            >
+            <p className="mt-4 max-w-xl text-base leading-7 text-[#6b5548]">
               Share a few details about your project or enquiry and
               let&apos;s explore how we can work together.
             </p>
 
-            {/* ================= FORM ================= */}
+            {/* FORM */}
 
             <form
               onSubmit={handleSubmit}
               className="mt-10 space-y-6"
             >
-
               <div className="grid gap-6 sm:grid-cols-2">
-
-                {/* NAME */}
-
-                <div
-                  className={`transition-all duration-700 ${
-                    visible
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-8 opacity-0"
-                  }`}
-                  style={{
-                    transitionDelay: "800ms",
-                  }}
-                >
+                <div>
                   <label className="mb-3 block text-xs font-bold tracking-[0.14em] text-[#79513b]">
                     YOUR NAME
                   </label>
@@ -470,18 +403,7 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* EMAIL */}
-
-                <div
-                  className={`transition-all duration-700 ${
-                    visible
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-8 opacity-0"
-                  }`}
-                  style={{
-                    transitionDelay: "900ms",
-                  }}
-                >
+                <div>
                   <label className="mb-3 block text-xs font-bold tracking-[0.14em] text-[#79513b]">
                     EMAIL ADDRESS
                   </label>
@@ -497,18 +419,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* SUBJECT */}
-
-              <div
-                className={`transition-all duration-700 ${
-                  visible
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
-                }`}
-                style={{
-                  transitionDelay: "1000ms",
-                }}
-              >
+              <div>
                 <label className="mb-3 block text-xs font-bold tracking-[0.14em] text-[#79513b]">
                   SUBJECT
                 </label>
@@ -523,18 +434,7 @@ export default function Contact() {
                 />
               </div>
 
-              {/* MESSAGE */}
-
-              <div
-                className={`transition-all duration-700 ${
-                  visible
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
-                }`}
-                style={{
-                  transitionDelay: "1100ms",
-                }}
-              >
+              <div>
                 <label className="mb-3 block text-xs font-bold tracking-[0.14em] text-[#79513b]">
                   MESSAGE
                 </label>
@@ -549,18 +449,9 @@ export default function Contact() {
                 />
               </div>
 
-              {/* BUTTON */}
-
               <button
                 type="submit"
-                className={`group mt-3 flex items-center gap-3 rounded-full bg-[#382a22] px-8 py-4 text-sm font-bold tracking-[0.08em] text-[#f7efe7] transition-all duration-500 hover:-translate-y-2 hover:bg-[#79513b] hover:shadow-[0_20px_40px_rgba(56,42,34,0.25)] ${
-                  visible
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
-                }`}
-                style={{
-                  transitionDelay: "1200ms",
-                }}
+                className="group mt-3 flex items-center gap-3 rounded-full bg-[#382a22] px-8 py-4 text-sm font-bold tracking-[0.08em] text-[#f7efe7] transition-all duration-500 hover:-translate-y-2 hover:bg-[#79513b] hover:shadow-[0_20px_40px_rgba(56,42,34,0.25)]"
               >
                 SEND MESSAGE
 
@@ -573,7 +464,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* ================= BOTTOM STATEMENT ================= */}
+        {/* BOTTOM STATEMENT */}
 
         <div
           className={`mt-20 border-t border-[#b99c86]/60 pt-10 transition-all duration-[1200ms] ${
@@ -586,7 +477,6 @@ export default function Contact() {
           }}
         >
           <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
-
             <p
               className="max-w-3xl text-2xl leading-relaxed text-[#5a4032] sm:text-3xl"
               style={{
@@ -598,10 +488,9 @@ export default function Contact() {
                 {" "}and every conversation begins with an idea.
               </span>
             </p>
-
-            </div>
           </div>
         </div>
+      </div>
     </section>
   );
 }
