@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       from: "Smija Portfolio <onboarding@resend.dev>",
 
       // Testing recipient - your Resend account email
-      to: ["anakhavijay766@gmail.com"],
+      to: ["smijavijayan1@gmail.com"],
 
       replyTo: email,
 
