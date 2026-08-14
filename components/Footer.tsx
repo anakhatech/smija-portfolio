@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, Mail, Phone } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -13,7 +13,7 @@ const navLinks = [
   { name: "Contact", href: "#contact" },
 ];
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: {
     opacity: 0,
     y: 40,
@@ -28,7 +28,7 @@ const fadeUp = {
   },
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
@@ -40,7 +40,6 @@ const staggerContainer = {
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#382A22] px-6 pt-24 lg:px-10">
-      
       {/* ANIMATED BACKGROUND DECORATIONS */}
 
       <motion.div
@@ -71,25 +70,10 @@ export default function Footer() {
         className="absolute -right-32 top-0 h-[24rem] w-[24rem] rounded-full bg-[#CFA67F]/10 blur-3xl"
       />
 
-      {/* SUBTLE DECORATIVE CIRCLE */}
-
-      <motion.div
-        animate={{
-          rotate: 360,
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-
       <div className="relative mx-auto max-w-7xl">
-
         {/* TOP */}
 
         <div className="grid gap-16 pb-20 lg:grid-cols-[1.15fr_0.85fr]">
-
           {/* LEFT SIDE */}
 
           <motion.div
@@ -148,8 +132,8 @@ export default function Footer() {
               variants={fadeUp}
               className="mt-7 max-w-xl text-lg leading-8 text-[#D8C5B8]"
             >
-              Creating thoughtful interiors where creativity,
-              functionality and attention to detail come together.
+              Creating thoughtful interiors where creativity, functionality
+              and attention to detail come together.
             </motion.p>
 
             {/* BUTTON */}
@@ -247,7 +231,6 @@ export default function Footer() {
               </p>
 
               <div className="space-y-5">
-
                 {/* EMAIL */}
 
                 <motion.a
@@ -265,9 +248,7 @@ export default function Footer() {
                     <Mail size={18} className="text-[#CFA67F]" />
                   </motion.div>
 
-                  <span>
-                    smijavijayan1@gmail.com
-                  </span>
+                  <span>smijavijayan1@gmail.com</span>
                 </motion.a>
 
                 {/* PHONE */}
@@ -287,11 +268,8 @@ export default function Footer() {
                     <Phone size={18} className="text-[#CFA67F]" />
                   </motion.div>
 
-                  <span>
-                    +971-55-582-3354
-                  </span>
+                  <span>+971-55-582-3354</span>
                 </motion.a>
-
               </div>
             </motion.div>
           </motion.div>
@@ -318,7 +296,8 @@ export default function Footer() {
           className="flex flex-col gap-5 border-t border-[#F7EFE7]/10 py-8 text-sm text-[#BFAEA3] sm:flex-row sm:items-center sm:justify-between"
         >
           <p>
-            © {new Date().getFullYear()} Smija Pamparackal Soman. All rights reserved.
+            © {new Date().getFullYear()} Smija Pamparackal Soman. All rights
+            reserved.
           </p>
 
           <motion.a
